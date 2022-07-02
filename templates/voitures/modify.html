@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %} Liste de voiture{% endblock %}
+{% block content %}
+    <div class="mt-4">
+        {% if result %}
+            {% if result.fail %}
+                <div class="alert alert-danger" role="alert">{{result.fail}}</div>
+            {% endif %}
+            {% if result.success %}
+                 <div class="alert alert-success" role="alert">{{result.success}}</div>
+            {% endif %}
+            {% if result.voiture %}
+                {% with voiture=result.voiture%}
+                <div class="text-right">
+                    {% if voiture['etat'] == 0 %}
+                       <td><span class="badge badge-success">Disponible</span></td>
+                    {% elif result.locataire %}
+                       <td><span class="badge badge-secondary">En cours de location à {{result.locataire.prenom}} {{result.locataire.nom}}</span></td>
+                    {% endif %}
+                </div>
+                <form action="{{url_for('modify_voitures', id=voiture['id'])}}" method="post">
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="num_imma">Immatriculation</label>
+                          <input type="text" class="form-control" value="{{voiture['num_imma']}}" name="num_imma" id="num_imma" placeholder="immatriculation" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="marque">Marque</label>
+                          <input type="text" class="form-control" value="{{voiture['marque']}}" name="marque" id="marque" placeholder="Marque" required>
+                        </div>
+                         <div class="form-group col-md-6">
+                            <label for="modele">Modele</label>
+                            <input type="text" class="form-control" value="{{voiture['modele']}}" name="modele" id="modele" placeholder="Modele" required>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="kilometrage">kilometrage</label>
+                            <input type="text" class="form-control" value="{{voiture['kilometrage']}}" name="kilometrage" id="kilometrage" placeholder="kilometrage" required>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="prix">Prix location</label>
+                            <input type="text" class="form-control" value="{{voiture['prix_location']}}" name="prix_location" id="prix" placeholder="Prix location" required>
+                          </div>
+                          {% if voiture.etat == 1 %}
+                                 <div class="form-group col-md-6">
+                                      <label for="prix">Etat de voiture</label>
+                                      <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="etat" id="etat1" value="1"
+                                                 {% if voiture.etat == 1 %} checked {% endif %}>
+                                          <label class="form-check-label" for="etat1">
+                                            En cours de location
+                                          </label>
+                                      </div>
+                                      <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="etat" id="etat0" value="0"
+                                             {% if voiture.etat == 0 %} checked {% endif %}>
+                                          <label class="form-check-label" for="etat0">
+                                           Disponible
+                                          </label>
+                                      </div>
+                                  </div>
+                          {% else %}
+                            {% if result.locataires %}
+                                  <div class="form-group col-md-6">
+                                     <label for="prix">Louer à</label>
+                                    <select class="form-control" name="locataire">
+                                        <option>sélectionner locataire</option>
+                                        {% for locataire in result.locataires %}
+                                            <option value="{{locataire.id}}">{{locataire.prenom}} {{locataire.nom}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% endif %}
+
+                          {% endif %}
+
+                      </div>
+
+                      <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                    <a href="{{url_for('supprimer_voiture', id=result.voiture['id'])}}" type="submit" class="btn btn-danger">Supprimer</a>
+
+                </form>
+                {% endwith %}
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}
