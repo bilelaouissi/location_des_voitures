@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} Liste de voiture{% endblock %}
+{% block content %}
+    <div class="text-right mt-2"><a href="{{url_for('add_voitures')}}" type="button" class="btn btn-primary">Ajouter</a></div>
+    <div class="mt-4">
+        <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th>Num_imma</th>
+                <th>Marque</th>
+                <th>Modele</th>
+                <th>Kilometrage</th>
+                <th>Prix</th>
+                <th>Etat</th>
+                <th>action</th>
+              </tr>
+            </thead>
+            <tbody>
+               {% for voiture in voitures %}
+              <tr>
+
+                <td>{{ voiture['num_imma'] }}</td>
+                <td>{{ voiture['marque'] }}</td>
+                <td>{{ voiture['modele'] }}</td>
+                <td>{{ voiture['kilometrage'] }}</td>
+                <td>{{ voiture['prix_location'] }}</td>
+                {% if voiture['etat'] == 0 %}
+                   <td><span class="badge badge-success">Disponible</span></td>
+                {% else %}
+                   <td><span class="badge badge-secondary">En cours de location</span></td>
+                {% endif %}
+                <td class="text-center">
+                    <a  href="{{url_for('modify_voitures', id=voiture['id'])}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                </td>
+              </tr>
+             {% endfor %}
+            </tbody>
+        </table>
+        </div>
+{% endblock %}

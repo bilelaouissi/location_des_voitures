@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %} Liste de voiture{% endblock %}
+{% block content %}
+    <div class="mt-4">
+        {% if result %}
+            {% if result.fail %}
+                <div class="alert alert-danger" role="alert">{{result.fail}}</div>
+            {% endif %}
+            {% if result.success %}
+                 <div class="alert alert-success" role="alert">{{result.success}}</div>
+            {% endif %}
+        {% endif %}
+
+        <form action="{{ url_for('add_voitures')}}" method="post">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="num_imma">Immatriculation</label>
+                  <input type="text" class="form-control" name="num_imma" id="num_imma" placeholder="immatriculation" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="marque">Marque</label>
+                  <input type="text" class="form-control" name="marque" id="marque" placeholder="Marque" required>
+                </div>
+                 <div class="form-group col-md-6">
+                    <label for="modele">Modele</label>
+                    <input type="text" class="form-control" name="modele" id="modele" placeholder="Modele" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="kilometrage">kilometrage</label>
+                    <input type="text" class="form-control" name="kilometrage" id="kilometrage" placeholder="kilometrage" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="prix">Prix location</label>
+                    <input type="text" class="form-control" name="prix_location" id="prix" placeholder="Prix location" required>
+                  </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+    </div>
+{% endblock %}
