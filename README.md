@@ -4,7 +4,7 @@ Mini projet location des voitures
 ## Comment l'installez-vous?
 - utiliser git pour cloner.
 ```bash
-git clone https://github.com/AtefZoiaidi/location-des-voitures.git
+git clone https://github.com/bilelaouissi/location-des-voitures.git
 ```
 - Création d'environnements virtuels.
 ```bash
