@@ -12,11 +12,11 @@ python -m venv location-voiture/venv
 ```
 - Activer l'environnement virtuel
 ```bash
-source location-voiture/venv/bin/activate
+source location-voiture/venv/Scripts/activate
 ```
 - Installer des packages avec pip
 ```bash
- pip install -r requirements.txt
+ pip install -r requirement.txt
  ```
 - Exécuter l'application
 ```bash
