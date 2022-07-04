@@ -10,13 +10,13 @@ git clone https://github.com/bilelaouissi/location-des-voitures.git
 ```bash
 python -m venv location-voiture/venv
 ```
--Installation de virtualenv
+- Installation de virtualenv
 ```bash
 pip install virtualenv
 ```
 - Activer l'environnement virtuel
 ```bash
-source location-voiture\venv\Scripts\activate
+location-voiture\venv\Scripts\activate
 ```
 - Installer des packages avec pip
 ```bash
